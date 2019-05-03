@@ -3,24 +3,34 @@
 
 #include "pch.h"
 #include <iostream>
-#include "Benchmark.h"
 #include <thread>
+#include "Benchmark.h"
+#include "ParallelFunctions.h"
 
 using namespace std;
 
 int main()
 {
 	Benchmark myBenchmark;
+	ParallelFunctions parFunctions;
 	int total = 0;
+
+	const int arraySize = 30;
+
+	int myArray[arraySize] ;
+
+	for (size_t i = 0; i < arraySize; i++)
+	{
+		myArray[i] = rand() % 100;
+	}
+
+	int n = sizeof(myArray) / sizeof(myArray[0]);
 
 	myBenchmark.StartTimer();
 
-	for (size_t i = 0; i < 10000000; i++)
-	{
-		total += i;		
-	}
+	parFunctions.SortSequential(myArray, n);
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(15));
+	//std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
 	myBenchmark.StopTimer();
 
