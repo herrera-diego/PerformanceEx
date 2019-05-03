@@ -4,15 +4,14 @@
 #include "pch.h"
 #include <iostream>
 #include <thread>
-#include "Benchmark.h"
 #include "ParallelFunctions.h"
+#include "Benchmark.h"
 
-using namespace std;
 
 int main()
 {
 	Benchmark myBenchmark;
-	ParallelFunctions parFunctions;
+	ParallelFunctions<int> parFunctions;
 	int total = 0;
 
 	const int arraySize = 30;

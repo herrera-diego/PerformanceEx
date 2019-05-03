@@ -2,16 +2,41 @@
 #include "ParallelFunctions.h"
 
 
-ParallelFunctions::ParallelFunctions()
+template<class T>
+ParallelFunctions<T>::ParallelFunctions()
 {
 }
 
-
-ParallelFunctions::~ParallelFunctions()
+template<class T>
+ParallelFunctions<T>::~ParallelFunctions()
 {
 }
 
-void ParallelFunctions::SortParallel(int arr[], int n)
+template <class T>
+void ParallelFunctions<T>::SortSequential(T arr[], int n)
+{
+
+	int i, j;
+
+	printArray(arr, n);
+
+	for (i = 0; i < n - 1; i++)
+	{
+		// Last i elements are already in place    
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				swap(&arr[j], &arr[j + 1]);
+			}
+		}
+	}
+
+	printArray(arr, n);
+}
+
+template <class T>
+void ParallelFunctions<T>::SortParallel(T arr[], int n)
 {
 	int i, j;
 
@@ -28,49 +53,33 @@ void ParallelFunctions::SortParallel(int arr[], int n)
 			}
 		}
 
-		for_each(std::execution::par_unseq, std::begin(arr), std::end(arr), [&](int) {
-			std::lock_guard<std::mutex> guard(m); // Error: lock_guard constructor calls m.lock()
-			++x;
+		for_each(std::begin(arr), std::end(arr), [&](int)
+		{
+			//std::lock_guard<std::mutex> guard(m); // Error: lock_guard constructor calls m.lock()
+			//++x;
 		});
 	}
 
 	printArray(arr, n);
 }
 
-void ParallelFunctions::SortSequential(int arr[], int n)
-{
 
-	int i, j;
 
-	printArray(arr,n);
-
-	for (i = 0; i < n - 1; i++)
-	{
-		// Last i elements are already in place    
-		for (j = 0; j < n - i - 1; j++)
-		{
-			if (arr[j] > arr[j + 1])
-			{
-				swap(&arr[j], &arr[j + 1]);
-			}
-		}
-	}
-
-	printArray(arr, n);
-}
-
-void ParallelFunctions::AutoSortParallel(int arr[], int n)
+template <class T>
+void ParallelFunctions<T>::AutoSortParallel(T arr[], int n)
 {
 }
 
-void ParallelFunctions::swap(int *xp, int *yp)
+template <class T>
+void ParallelFunctions<T>::swap(T *xp, T *yp)
 {
-	int temp = *xp;
+	T temp = *xp;
 	*xp = *yp;
 	*yp = temp;
 }
 
-void ParallelFunctions::printArray(int arr[], int size)
+template <class T>
+void ParallelFunctions<T>::printArray(T arr[], int size)
 {
 	int i;
 	cout << "Array: ";
@@ -83,3 +92,4 @@ void ParallelFunctions::printArray(int arr[], int size)
 		<< size
 		<< endl;
 }
+

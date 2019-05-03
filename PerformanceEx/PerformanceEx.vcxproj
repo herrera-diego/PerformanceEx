@@ -23,7 +23,7 @@
     <ProjectGuid>{45A39822-EA7B-45C1-A887-5BB369A2ACF4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PerformanceEx</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -106,6 +106,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

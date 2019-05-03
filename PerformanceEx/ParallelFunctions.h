@@ -1,20 +1,22 @@
 #pragma once
 
 #include <iostream>
+#include <algorithm>
+#include <vector> 
 
 using namespace std;
 
+template <class T>
 class ParallelFunctions
 {
 private:
-	void swap(int *xp, int *yp);
-	void printArray(int arr[], int size);
+	void swap(T *xp, T *yp);
+	void printArray(T arr[], int size);
 public:
 	ParallelFunctions();
 	~ParallelFunctions();
-
-	void SortParallel(int arr[], int n);
-	void SortSequential(int arr[], int n);
-	void AutoSortParallel(int arr[], int n);
+	void SortParallel(T arr[], int n);
+	void SortSequential(T arr[], int n);
+	void AutoSortParallel(T arr[], int n);
 };
 
